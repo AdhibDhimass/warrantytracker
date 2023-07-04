@@ -10,11 +10,8 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
 
-            <div class="navbar-collapse offcanvas-collapse ml" id="navbarsExampleDefault" style="margin-left: 950px">
-                <ul class="navbar-nav " >
-                    <li class="nav-item">
-                        <a class="nav-link page-scroll" href="#home" style="color: #fff">Home</a>
-                    </li>
+            <div class="navbar-collapse offcanvas-collapse ml" id="navbarsExampleDefault" style="margin-left: 1050px">
+                <ul class="navbar-nav">
                     <li class="nav-item">
                         <a class="nav-link page-scroll" href="#features" style="color: #fff">Features</a>
                     </li>
@@ -43,10 +40,8 @@
         </div>
     </nav>
 
-
-
     <!-- Header -->
-    <div class="header" id="home">
+    <div class="header">
         <div class="ocean">
             <div class="wave"></div>
             <div class="wave"></div>
@@ -55,22 +50,22 @@
             <div class="row">
                 <div class="col-lg-6">
                     <div class="text-container">
-                        <h1 class="h1-large">Welcome To The Warranty Checking   Website</h1>
-                        <p class="p-large">Use Gemdev to create awesome websites for your products, services and ideas in a short amount of time</p>
-                    @role('admin')
-                        <a class="btn-solid-lg page-scroll" href="/products">Dasboard</a>
-                    @endrole
-                    @role('user')
-                        <a class="btn-solid-lg page-scroll" href="#features">Check</a>
-                    @endrole
-                    @guest
-                    <a class="btn-solid-lg page-scroll" href="#features">Check</a>
-                    @endguest
+                        <h1 class="h1-large">Welcome To The Warranty Checking Website</h1>
+                          <p class="p-large"> Mulai Check Garansi Barang Anda Dengan Mudah Dan Cepat </p>
+                        @role('admin')
+                            <a class="btn-solid-lg page-scroll" href="/products">Dasboard</a>
+                        @endrole
+                        @role('user')
+                            <a class="btn-solid-lg page-scroll" href="#features">Check</a>
+                        @endrole
+                        @guest
+                            <a class="btn-solid-lg page-scroll" href="#features">Check</a>
+                        @endguest
                     </div>
                 </div>
                 <div class="col-lg-6">
                     <div class="image-container">
-                        <img class="img-fluid" src="gemdev/images/protection.png" alt="alternative">
+                        <img class="img-fluid" src="gemdev/images/verified.png" alt="alternative">
                     </div>
                 </div>
             </div>
@@ -78,13 +73,12 @@
     </div>
 
    <!-- Product Table -->
-
-   <section id="features" class="features-area pt-250 pb-265" style="padding-top: 150px; margin-bottom: 150px">
+   <section id="features" class="features-area pt-250 pb-265" style="padding-top: 130px; margin-bottom: 170px">
     <div class="container">
         <div class="row">
             <div class="col-xl-8 col-lg-8 offset-lg-2 offset-xl-2">
                 <div class="section-title text-center mb-70">
-                    <h2 style="font-weight: bold;">Warranty Check</h2>
+                    <H3 style="font-weight: bold;">Warranty Check</H3>
                     @guest
                     <p>Silakan Login/Register untuk memeriksa garansi produk Anda.</p>
                     @endguest
@@ -97,7 +91,7 @@
         <div class="row" style="padding-top: 50px">
             @auth
             <div class="col-12">
-                <input type="search" id="query" class="form-control mb-3" placeholder="Masukkan kode product" aria-label="Search" />
+                <input type="search" id="query" class="form-control mb-3" placeholder="Masukkan kode product Anda" aria-label="Search" />
             </div>
             <div class="card-body" id="table">
                 <table class="table">
@@ -111,14 +105,12 @@
                             <th>Status</th>
                         </tr>
                     </thead>
-                    <tbody id="results">
-                    </tbody>
                 </table>
             </div>
             @endauth
+         </div>
         </div>
-    </div>
-</section>
+    </section>
 
 
     <!-- Copyright -->
@@ -162,16 +154,20 @@
                             resultsContainer.empty();
 
                             if (query !== '') {
-                                $.each(response, function(index, product) {
-                                    results += '<tr>';
-                                    results += '<td>' + product.product_name + '</td>';
-                                    results += '<td>' + product.product_code + '</td>';
-                                    results += '<td>' + product.description + '</td>';
-                                    results += '<td>' + product.warranty_start_date + '</td>';
-                                    results += '<td>' + product.warranty_end_date + '</td>';
-                                    results += '<td>' + product.warranty_status + '</td>';
-                                    results += '</tr>';
-                                });
+                                if (response.length > 0) {
+                                    $.each(response, function(index, product) {
+                                        results += '<tr>';
+                                        results += '<td>' + product.product_name + '</td>';
+                                        results += '<td>' + product.product_code + '</td>';
+                                        results += '<td>' + product.description + '</td>';
+                                        results += '<td>' + product.warranty_start_date + '</td>';
+                                        results += '<td>' + product.warranty_end_date + '</td>';
+                                        results += '<td>' + product.warranty_status + '</td>';
+                                        results += '</tr>';
+                                    });
+                                } else {
+                                    results = '<tr><td colspan="6" style="text-align: center;">Produk yang Anda cari tidak dapat ditemukan</td></tr>';
+                                }
                             }
 
                             resultsContainer.html(results);
@@ -180,22 +176,19 @@
                 }, 700); // delay
             });
         });
-        </script>
+    </script>
 
-<script>
-    $(document).ready(function() {
-        // Tambahkan event listener pada tombol toggle navbar
-        $('.navbar-toggler').on('click', function() {
-            $('.navbar-collapse').toggleClass('show'); // Menambahkan/menghapus kelas 'show' pada elemen navbar-collapse
+
+    <script>
+        $(document).ready(function() {
+            $('.navbar-toggler').on('click', function() {
+                $('.navbar-collapse').toggleClass('show');
+            });
+
+            $('.nav-link').on('click', function() {
+                $('.navbar-collapse').removeClass('show');
+            });
         });
-
-        // Tambahkan event listener pada setiap tombol navbar
-        $('.nav-link').on('click', function() {
-            $('.navbar-collapse').removeClass('show'); // Menghapus kelas 'show' pada elemen navbar-collapse
-        });
-    });
-</script>
-
-
+    </script>
 
     @endsection
