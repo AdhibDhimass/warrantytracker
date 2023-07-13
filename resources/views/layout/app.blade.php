@@ -37,12 +37,12 @@
 
 
     <!-- Scripts -->
-    <script src="gemdev/js/jquery.min.js"></script> <!-- jQuery for Bootstrap's JavaScript plugins -->
-    <script src="gemdev/js/bootstrap.min.js"></script> <!-- Bootstrap framework -->
-    <script src="gemdev/js/jquery.easing.min.js"></script> <!-- jQuery Easing for smooth scrolling between anchors -->
-    <script src="gemdev/js/swiper.min.js"></script> <!-- Swiper for image and text sliders -->
-    <script src="gemdev/js/jquery.magnific-popup.js"></script> <!-- Magnific Popup for lightboxes -->
-    <script src="gemdev/js/scripts.js"></script> <!-- Custom scripts -->
+    <script src="gem/js/jquery.min.js"></script> <!-- jQuery for Bootstrap's JavaScript plugins -->
+    <script src="gem/js/bootstrap.min.js"></script> <!-- Bootstrap framework -->
+    <script src="gem/js/jquery.easing.min.js"></script> <!-- jQuery Easing for smooth scrolling between anchors -->
+    <script src="gem/js/swiper.min.js"></script> <!-- Swiper for image and text sliders -->
+    <script src="gem/js/jquery.magnific-popup.js"></script> <!-- Magnific Popup for lightboxes -->
+    <script src="gem/js/scripts.js"></script> <!-- Custom scripts -->
     <script src="https://kit.fontawesome.com/61bcac0926.js" crossorigin="anonymous"></script>
     <script>
         $(document).ready(function() {
