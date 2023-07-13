@@ -4,7 +4,7 @@
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg fixed-top navbar-dark" id="navbar" style="background-color: #670979">
         <div class="container">
-            <a class="navbar-brand logo-image" href="index.html"><img src="gemdev/images/logo.png" alt="alternative" style="width:auto; height:50px"></a>
+            <a class="navbar-brand logo-image" href="index.html"><img src="gem/images/logo.png" alt="alternative" style="width:auto; height:50px"></a>
 
             <button class="navbar-toggler p-0 border-0" type="button" data-toggle="offcanvas">
                 <span class="navbar-toggler-icon"></span>
@@ -65,7 +65,7 @@
                 </div>
                 <div class="col-lg-6">
                     <div class="image-container">
-                        <img class="img-fluid" src="gemdev/images/verified.png" alt="alternative">
+                        <img class="img-fluid" src="gem/images/verified.png" alt="alternative">
                     </div>
                 </div>
             </div>

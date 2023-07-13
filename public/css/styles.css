@@ -532,7 +532,7 @@ background: linear-gradient(90deg, rgba(103,9,121,1) 9%, rgb(208, 0, 128) 100%);
     padding-top: 6rem;
     padding-bottom: 17rem;
     background: rgb(103,9,121);
-    background: linear-gradient(90deg, rgba(103,9,121,1) 9%, rgba(255,0,193,1) 100%);
+background: linear-gradient(90deg, rgba(103,9,121,1) 9%, rgb(208, 0, 128) 100%);
 }
 
 .header .text-container {
@@ -954,7 +954,7 @@ background: linear-gradient(90deg, rgba(103,9,121,1) 9%, rgb(208, 0, 128) 100%);
 /*********************/
 .copyright {
     background: rgb(103,9,121);
-    background: linear-gradient(90deg, rgba(103,9,121,1) 9%, rgba(255,0,193,1) 100%);
+    background: linear-gradient(90deg, rgba(103,9,121,1) 9%, rgb(208, 0, 128) 100%);
     padding-top: 1rem;
     padding-bottom: 1rem;
     text-align: center;
@@ -981,7 +981,7 @@ a.back-to-top {
     width: 42px;
     height: 42px;
     border-radius: 30px;
-    background: #1b1e7b url("gemdev/images/up-arrow.png") no-repeat center 47%;
+    background: #1b1e7b url("gem/images/up-arrow.png") no-repeat center 47%;
     background-size: 18px 18px;
     text-indent: -9999px;
 }
