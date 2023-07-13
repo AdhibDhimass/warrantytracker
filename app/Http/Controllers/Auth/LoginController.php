@@ -30,6 +30,10 @@ class LoginController extends Controller
     protected $redirectTo = RouteServiceProvider::HOME;
 
     /**
+     *
+     *
+     *
+     *
      * Create a new controller instance.
      *
      * @return void
@@ -42,7 +46,7 @@ class LoginController extends Controller
     protected function authenticated(Request $request, $user)
     {
         if ($user->hasRole('admin')) {
-            return redirect()->route('products.index');
+            return redirect()->route('dashboard');
         }
     }
 }

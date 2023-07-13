@@ -874,6 +874,8 @@ background: linear-gradient(90deg, rgba(103,9,121,1) 9%, rgb(208, 0, 128) 100%);
     border-radius: 10px;
 }
 
+
+
 .basic-6 h4 {
     margin-bottom: 1.625rem;
 }
@@ -981,7 +983,7 @@ a.back-to-top {
     width: 42px;
     height: 42px;
     border-radius: 30px;
-    background: #1b1e7b url("../images/up-arrow.png") no-repeat center 47%;
+    background: #1b1e7b url("gemdev/images/up-arrow.png") no-repeat center 47%;
     background-size: 18px 18px;
     text-indent: -9999px;
 }

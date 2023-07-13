@@ -42,4 +42,6 @@
      @endguest
 
   </nav>
+
+  
   <!-- /.navbar -->

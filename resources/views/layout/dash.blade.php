@@ -50,7 +50,7 @@
       <!-- Default box -->
       <div class="card">
         <div class="card-header">
-          <h3 class="card-title">@yield('sub-title')</h3>
+          <h3 class="card-title">@yield ('sub-title')</h3>
 
           <div class="card-tools">
             <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
@@ -64,6 +64,49 @@
 
         <div class="card-body">
           @yield('content')
+          <div class="row">
+            <div class="col-lg-4 col-8 ">
+                <a href="/products">
+                    <div class="small-box bg-info p-3">
+                        <div class="inner">
+                            <h4>Total Produk</h4>
+                            <p style="font-size: 20px">{{ $productCount }}</p>
+                        </div>
+                        <div class="icon">
+                            <i class="fa-sharp fa-solid fa-scroll"></i>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+
+            <!-- ./col -->
+            <div class="col-lg-4 col-12 ">
+                <div class="small-box bg-success p-3">
+                  <div class="inner">
+                    <h4 style="font-family: 'Poppins', sans-serif;">Produk Aktif</h4>
+                    <p style="font-size: 20px">{{ $activeProductCount }}</p>
+                  </div>
+                  <div class="icon">
+                    <i class="fa-solid fa-file-circle-check"></i>
+                  </div>
+                </div>
+              </div>
+
+            <!-- ./col -->
+            <div class="col-lg-4 col-6">
+              <div class="small-box bg-danger p-3">
+                <div class="inner">
+                  <h4 >Produk Expired</h4>
+                  <p style="font-size: 20px">{{$expiredProductCount}}</p>
+                </div>
+                <div class="icon">
+                    <i class="fa-solid fa-file-circle-xmark"></i>
+                </div>
+              </div>
+            </div>
+            <!-- ./col -->
+          </div>
         </div>
       </div>
 

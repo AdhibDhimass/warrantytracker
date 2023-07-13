@@ -9,29 +9,39 @@ use Carbon\Carbon;
 class SearchController extends Controller
 {
     public function search(Request $request)
-    {
-        $query = $request->input('query');
+{
+    $query = $request->input('query');
 
-        // Melakukan pencarian berdasarkan kode product
-        $products = Product::where('product_code', 'like', '%'.$query.'%')->get();
+    $products = Product::where('product_code',  $query)->get();
 
-        $today = Carbon::today();
-
-        foreach ($products as $product) {
-            $warranty_start_date = Carbon::parse($product->warranty_start_date);
-            $warranty_end_date = Carbon::parse($product->warranty_end_date);
-
-            if ($today->between($warranty_start_date, $warranty_end_date, true)) {
-                $remainingTime = $today->diff($warranty_end_date);
-                $remainingDays = $remainingTime->days;
-                $remainingHours = $remainingTime->h;
-                $product->warranty_status = 'aktif (Sisa waktu: ' . $remainingDays . ' hari ' . $remainingHours . ' jam)';
-            } else {
-                $product->warranty_status = 'expired';
-            }
-        }
-
-        return response()->json($products);
+    foreach ($products as $product) {
+        $product->warranty_start_date = Carbon::parse($product->warranty_start_date)->format('Y-m-d');
+        $product->warranty_end_date = Carbon::parse($product->warranty_end_date)->format('Y-m-d');
+        $product->remainingDays = $this->calculateRemainingDays($product->warranty_end_date);
+        $product->warrantyStatus = $this->getWarrantyStatus($product->warranty_end_date);
     }
 
+    return response()->json($products);
+}
+
+private function calculateRemainingDays($endDate)
+{
+    $currentDate = Carbon::now();
+    $end = Carbon::parse($endDate);
+    $diffInDays = $currentDate->diffInDays($end, false);
+
+    return $diffInDays > 0 ? $diffInDays : 0;
+}
+
+private function getWarrantyStatus($endDate)
+{
+    $currentDate = Carbon::now();
+    $end = Carbon::parse($endDate);
+
+    if ($currentDate->greaterThanOrEqualTo($end)) {
+        return 'expired';
+    }
+
+    return 'active';
+}
 }

@@ -53,7 +53,7 @@
                         <h1 class="h1-large">Welcome To The Warranty Checking Website</h1>
                           <p class="p-large"> Mulai Check Garansi Barang Anda Dengan Mudah Dan Cepat </p>
                         @role('admin')
-                            <a class="btn-solid-lg page-scroll" href="/products">Dasboard</a>
+                            <a class="btn-solid-lg page-scroll" href="/dashboard">Dasboard</a>
                         @endrole
                         @role('user')
                             <a class="btn-solid-lg page-scroll" href="#features">Check</a>
@@ -78,37 +78,38 @@
         <div class="row">
             <div class="col-xl-8 col-lg-8 offset-lg-2 offset-xl-2">
                 <div class="section-title text-center mb-70">
-                    <H3 style="font-weight: bold;">Warranty Check</H3>
-                    @guest
-                    <p>Silakan Login/Register untuk memeriksa garansi produk Anda.</p>
-                    @endguest
-                    @auth
+                    <h3 style="font-weight: bold;">Warranty Check</h3>
                     <p>Masukkan kode produk Anda di bawah ini untuk melihat masa garansi produk anda</p>
-                    @endauth
                 </div>
             </div>
         </div>
-        <div class="row" style="padding-top: 50px">
-            @auth
-            <div class="col-12">
-                <input type="search" id="query" class="form-control mb-3" placeholder="Masukkan kode product Anda" aria-label="Search" />
+        <div class="col-12 mx-auto d-flex justify-content-center">
+            <div class="search-input-container">
+                <input type="search" id="query" class="form-control mb-auto" style="border-width: 2px" placeholder="Masukkan kode product" aria-label="Search" />
+                <button class="search-icon-btn" type="button">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </button>
             </div>
+        </div>
+
             <div class="card-body" id="table">
                 <table class="table">
                     <thead>
                         <tr>
-                            <th>Product Name</th>
-                            <th>Product Code</th>
-                            <th>Description</th>
-                            <th>Start Date</th>
-                            <th>End Date</th>
+                            <th>Nama Produk</th>
+                            <th>Kode Produk</th>
+                            <th>Deskripsi</th>
+                            <th>Tanggal Mulai Garansi</th>
+                            <th>Tanggal Selesai Garansi</th>
+                            <th>Masa Garansi</th>
                             <th>Status</th>
                         </tr>
                     </thead>
+                    <tbody id="results">
+                    </tbody>
                 </table>
             </div>
-            @endauth
-         </div>
+        </div>
         </div>
     </section>
 
@@ -131,6 +132,48 @@
 
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+   <style>
+    .search-input-container {
+    position: relative;
+}
+
+    .search-input-container .form-control {
+        padding-right: 40px; /* Ruang untuk ikon search */
+    }
+
+    .search-input-container .search-icon-btn {
+        position: absolute;
+        top: 50%;
+        right: 10px;
+        transform: translateY(-50%);
+        background: transparent;
+        border: none;
+        outline: none;
+        cursor: pointer;
+    }
+
+    .search-input-container .search-icon-btn i {
+        color: #000;
+    }
+
+
+
+    .badge-success {
+        background-color: green;
+        color: white;
+    }
+
+    .badge-danger {
+        background-color: red;
+        color: white;
+    }
+
+
+
+
+    </style>
+
     <script>
         $(document).ready(function() {
             var resultsContainer = $('#results');
@@ -141,6 +184,11 @@
 
                 delayTimer = setTimeout(function() {
                     var query = $('#query').val();
+
+                    if (query.length < 3) {
+                        resultsContainer.empty();
+                        return; // Tidak tampilkan hasil jika kode kurang dari 3 karakter
+                    }
 
                     $.ajax({
                         url: "{{ route('product.search') }}",
@@ -162,21 +210,41 @@
                                         results += '<td>' + product.description + '</td>';
                                         results += '<td>' + product.warranty_start_date + '</td>';
                                         results += '<td>' + product.warranty_end_date + '</td>';
-                                        results += '<td>' + product.warranty_status + '</td>';
+                                        results += '<td>' + product.remainingDays + ' hari</td>';
+
+                                        // Menambahkan class "badge" dan "badge-success" atau "badge-danger" sesuai kondisi
+                                        results += '<td class="badge ' + getProductStatusClass(product.warrantyStatus) + '">' + product.warrantyStatus + '</td>';
+
                                         results += '</tr>';
                                     });
                                 } else {
-                                    results = '<tr><td colspan="6" style="text-align: center;">Produk yang Anda cari tidak dapat ditemukan</td></tr>';
+                                    results = '<tr><td colspan="7" style="text-align: center;">Produk yang Anda cari tidak dapat ditemukan</td></tr>';
                                 }
                             }
 
                             resultsContainer.html(results);
                         }
+
                     });
                 }, 700); // delay
             });
         });
+
+        function getProductStatusClass(status) {
+        if (status === 'active') {
+            return 'badge badge-success';
+        } else if (status === 'expired') {
+            return 'badge badge-danger';
+        }
+
+        return '';
+        }
     </script>
+
+
+
+
+
 
 
     <script>

@@ -92,17 +92,23 @@ class ProductController extends Controller
     {
         $today = Carbon::now();
         $warrantyStatus = '';
+        $remainingDays = null;
+
         if ($today >= $product->warranty_start_date && $today <= $product->warranty_end_date) {
             $warrantyStatus = 'active';
             $remainingTime = $today->diff($product->warranty_end_date);
             $remainingDays = $remainingTime->days;
-            $remainingHours = $remainingTime->h;
-            $warrantyStatus .= ' (Time Remaining: ' . $remainingDays . ' hari ' . $remainingHours . ' jam)';
         } else {
             $warrantyStatus = 'expired';
+            $remainingDays = 0;
         }
-        return $warrantyStatus;
+
+        return [
+            'status' => $warrantyStatus,
+            'remainingDays' => $remainingDays,
+        ];
     }
+
 
     /**
      * Remove the specified resource from storage.
@@ -113,7 +119,7 @@ class ProductController extends Controller
         return redirect()->route('products.index')->with('success', 'Product deleted successfully.');
     }
 
-    
+
 
 
 }

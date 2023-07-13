@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\LandingController;
+use App\Http\Controllers\DashboardController;
 use App\Models\Product;
 
 
@@ -22,6 +23,7 @@ use App\Models\Product;
 //produk
 Route::middleware(['auth', 'admin'])->group(function () {
     Route::resource('products', ProductController::class);
+    Route::get('/dashboard',[DashboardController::class,'dashboard'])->name('dashboard');
 });
 
  Auth::routes();

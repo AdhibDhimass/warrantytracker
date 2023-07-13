@@ -33,6 +33,16 @@
 
         @auth
         <li class="nav-item">
+          <a href="/dashboard" class="nav-link">
+            <i class="nav-icon fas fa-tachometer-alt"></i>
+            <p>
+              Dashboard
+            </p>
+          </a>
+        </li>
+        @endauth
+        @auth
+        <li class="nav-item">
           <a href="/products" class="nav-link">
             <i class="nav-icon fas fa-tachometer-alt"></i>
             <p>

@@ -28,12 +28,10 @@
     <link href="css/swiper.css" rel="stylesheet">
 	<link href="css/magnific-popup.css" rel="stylesheet">
 	<link href="css/styles.css" rel="stylesheet">
-
 	<!-- Favicon  -->
     <link rel="icon" href="images/favicon.png">
 </head>
-<body data-spy="scroll" data-target=".fixed-top" style="color: #a53f72" id="body">
-    <a href="#" class="back-to-top">Back to Top</a>
+<a href="body" class="back-to-top page-scroll" style="display: none;">Back to Top</a>
 
 @yield('content')
 
@@ -45,6 +43,7 @@
     <script src="gemdev/js/swiper.min.js"></script> <!-- Swiper for image and text sliders -->
     <script src="gemdev/js/jquery.magnific-popup.js"></script> <!-- Magnific Popup for lightboxes -->
     <script src="gemdev/js/scripts.js"></script> <!-- Custom scripts -->
+    <script src="https://kit.fontawesome.com/61bcac0926.js" crossorigin="anonymous"></script>
     <script>
         $(document).ready(function() {
             // Tombol "Back to Top" diklik
